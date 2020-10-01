@@ -1,0 +1,11 @@
+---
+postfix_ses_packages:
+    - postfix
+    - s-nail
+    - libsasl2-modules
+
+postfix_ses_postfix_template: "postfix.cf.j2"
+postfix_ses_canonical_template: "sender_canonical.j2"
+postfix_ses_sasl_template: "sasl_passwd.j2"
+postfix_ses_sasl_passwd: "/etc/postfix/sasl_passwd"
+postfix_ses_ca_certificates: "/etc/ssl/certs/ca-certificates.crt"
