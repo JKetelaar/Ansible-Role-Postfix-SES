@@ -10,9 +10,6 @@ Required Variables
 # SES host
 postfix_ses_host: email-smtp.eu-central-1.amazonaws.com
 
-# Port of SES host
-postfix_ses_port: 587
-
 # SES username to login
 postfix_ses_username: my-username
 
@@ -46,6 +43,9 @@ postfix_ses_sasl_passwd: "/etc/postfix/sasl_passwd"
 
 # Location of where the ca-certificates certificate file is located
 postfix_ses_ca_certificates: "/etc/ssl/certs/ca-certificates.crt"
+
+# Port of SES host
+postfix_ses_port: 587
 ```
 
 Example Playbook

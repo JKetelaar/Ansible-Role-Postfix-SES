@@ -9,3 +9,5 @@ postfix_ses_canonical_template: "sender_canonical.j2"
 postfix_ses_sasl_template: "sasl_passwd.j2"
 postfix_ses_sasl_passwd: "/etc/postfix/sasl_passwd"
 postfix_ses_ca_certificates: "/etc/ssl/certs/ca-certificates.crt"
+
+postfix_ses_port: 587
