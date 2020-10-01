@@ -1,8 +1,8 @@
 ---
 postfix_ses_packages:
-    - postfix
-    - s-nail
-    - libsasl2-modules
+  - postfix
+  - s-nail
+  - libsasl2-modules
 
 postfix_ses_postfix_template: "postfix.cf.j2"
 postfix_ses_canonical_template: "sender_canonical.j2"

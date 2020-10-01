@@ -1,47 +1,47 @@
 ---
--   block:
-        -   name: Install required modules
-            apt:
-                pkg: "{{ postfix_ses_packages }}"
-                state: latest
-                update_cache: yes
-    tags:
-        - install
+- block:
+    - name: Install required modules
+      apt:
+        pkg: "{{ postfix_ses_packages }}"
+        state: latest
+        update_cache: yes
+  tags:
+    - install
 
--   block:
-        -   name: Create postfix/main.cf file
-            template:
-                src: "{{ postfix_ses_postfix_template }}"
-                dest: "/etc/postfix/main.cf"
-            notify: restart postfix
+- block:
+    - name: Create postfix/main.cf file
+      template:
+        src: "{{ postfix_ses_postfix_template }}"
+        dest: "/etc/postfix/main.cf"
+      notify: restart postfix
 
-        -   name: Create sasl_password file
-            template:
-                src: "{{ postfix_ses_sasl_template }}"
-                dest: "{{ postfix_ses_sasl_passwd }}"
+    - name: Create sasl_password file
+      template:
+        src: "{{ postfix_ses_sasl_template }}"
+        dest: "{{ postfix_ses_sasl_passwd }}"
 
-        -   name: Execute postmap command
-            command: "postmap hash:{{ postfix_ses_sasl_passwd }}"
-            notify: restart postfix
+    - name: Execute postmap command
+      command: "postmap hash:{{ postfix_ses_sasl_passwd }}"
+      notify: restart postfix
 
-        -   name: Remove sasl_passwd file
-            file:
-                path: "{{ postfix_ses_sasl_passwd }}"
-                state: absent
+    - name: Remove sasl_passwd file
+      file:
+        path: "{{ postfix_ses_sasl_passwd }}"
+        state: absent
 
-        -   name: Change permission of /etc/postfix/sasl_passwd.db
-            file:
-                path: /etc/postfix/sasl_passwd.db
-                mode: '0600'
+    - name: Change permission of /etc/postfix/sasl_passwd.db
+      file:
+        path: /etc/postfix/sasl_passwd.db
+        mode: '0600'
 
-        -   name: Execute postconf command
-            command: "postconf -e 'smtp_tls_CAfile = {{ postfix_ses_ca_certificates }}'"
-            notify: restart postfix
+    - name: Execute postconf command
+      command: "postconf -e 'smtp_tls_CAfile = {{ postfix_ses_ca_certificates }}'"
+      notify: restart postfix
 
-        -   name: Create postfix/sender_canonical file
-            template:
-                src: "{{ postfix_ses_canonical_template }}"
-                dest: "/etc/postfix/sender_canonical"
-            notify: restart postfix
-    tags:
-        - config
+    - name: Create postfix/sender_canonical file
+      template:
+        src: "{{ postfix_ses_canonical_template }}"
+        dest: "/etc/postfix/sender_canonical"
+      notify: restart postfix
+  tags:
+    - config
