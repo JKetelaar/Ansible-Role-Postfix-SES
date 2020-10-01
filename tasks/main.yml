@@ -3,7 +3,7 @@
     - name: Install required modules
       apt:
         pkg: "{{ postfix_ses_packages }}"
-        state: latest
+        state: present
         update_cache: yes
   tags:
     - install
